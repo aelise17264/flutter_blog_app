@@ -1,6 +1,8 @@
 import 'package:blog_app/blog_post.dart';
 import 'package:blog_app/blog_scaffold.dart';
+import 'package:blog_app/user.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'constrained_center.dart';
 
@@ -11,21 +13,21 @@ class BlogPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
+
     return BlogScaffold(
       postKids: [
         ConstrainedCenter(
           child: CircleAvatar(
-            backgroundImage: NetworkImage(
-              'https://media.licdn.com/dms/image/v2/D5603AQEl0i6TVmLqzg/profile-displayphoto-shrink_200_200/B56ZXO9fSyGUAY-/0/1742933980878?e=2147483647&v=beta&t=PIsNWor49ZBgJhEeOztl4PFNKjq6U1VcPomCxTmxz3A',
-            ),
+            backgroundImage: NetworkImage(user.profilePicture),
             radius: 54,
           ),
         ),
         SizedBox(height: 18),
         ConstrainedCenter(
           child: SelectableText(
-            'Flutter Dev',
-            style: Theme.of(context).textTheme.headlineSmall,
+            user.name,
+            style: Theme.of(context).textTheme.headlineMedium,
           ),
         ),
         SizedBox(height: 40),

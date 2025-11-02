@@ -1,4 +1,5 @@
 import 'package:blog_app/blog_post.dart';
+import 'package:blog_app/user.dart';
 import 'package:provider/provider.dart';
 import 'package:blog_app/home_page.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [Provider<List<BlogPost>>(create: (context) => _blogPosts)],
+      providers: [
+        Provider<List<BlogPost>>(create: (context) => _blogPosts),
+        Provider<User>(
+          create: (context) => User(
+            name: 'User Name',
+            profilePicture:
+                'https://media.licdn.com/dms/image/v2/D5603AQEl0i6TVmLqzg/profile-displayphoto-shrink_200_200/B56ZXO9fSyGUAY-/0/1742933980878?e=2147483647&v=beta&t=PIsNWor49ZBgJhEeOztl4PFNKjq6U1VcPomCxTmxz3A',
+          ),
+        ),
+      ],
 
       child: MaterialApp(
         title: 'Flutter Blog App',
