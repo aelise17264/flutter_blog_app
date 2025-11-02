@@ -1,0 +1,75 @@
+import 'package:blog_app/blog_post.dart';
+import 'package:blog_app/blog_scaffold.dart';
+import 'package:blog_app/constrained_center.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+  @override
+  Widget build(BuildContext context) {
+    final posts = Provider.of<List<BlogPost>>(context);
+    return 
+       BlogScaffold(
+        // crossAxisAlignment: CrossAxisAlignment.start,
+        // key: super.key,
+        postKids: [
+          ConstrainedCenter(
+            child: CircleAvatar(
+              backgroundImage: NetworkImage(
+                'https://media.licdn.com/dms/image/v2/D5603AQEl0i6TVmLqzg/profile-displayphoto-shrink_200_200/B56ZXO9fSyGUAY-/0/1742933980878?e=2147483647&v=beta&t=PIsNWor49ZBgJhEeOztl4PFNKjq6U1VcPomCxTmxz3A',
+              ),
+              radius: 72,
+            ),
+          ),
+          SizedBox(height: 18),
+          ConstrainedCenter(
+            child: SelectableText(
+              'Selectable Text',
+              style: Theme.of(context).textTheme.headlineLarge,
+            ),
+          ),
+          SizedBox(height: 40),
+          SelectableText(
+            'Description of Blog Post',
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
+          SizedBox(height: 40),
+          SelectableText(
+            'Subcategory of Blog Posts',
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+          for (var post in posts) BlogListTile(post: post),
+        ],
+      
+    );
+  }
+}
+
+class BlogListTile extends StatelessWidget {
+  final BlogPost post;
+  const BlogListTile({Key? key, required this.post}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: 20),
+        InkWell(
+          child: Text(
+            post.title,
+            style: TextStyle(color: Colors.blueAccent.shade700),
+          ),
+          onTap: () {},
+        ),
+        SizedBox(height: 10),
+        SelectableText(
+          DateFormat('d MMMM y').format(post.publishedDate),
+          style: Theme.of(context).textTheme.bodySmall,
+        ),
+      ],
+    );
+  }
+}
