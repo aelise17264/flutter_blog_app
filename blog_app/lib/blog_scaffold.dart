@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 class BlogScaffold extends StatelessWidget {
   final List<Widget> postKids;
 
-  const BlogScaffold({ Key? key, required this.postKids})
-    : super(key: key);
+  const BlogScaffold({Key? key, required this.postKids}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

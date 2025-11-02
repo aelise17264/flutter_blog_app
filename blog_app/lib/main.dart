@@ -49,6 +49,16 @@ class MyApp extends StatelessWidget {
 }
 
 final _blogPosts = [
-  BlogPost(title: 'Blog App', publishedDate: DateTime(2020, 1, 2)),
-  BlogPost(title: 'MultiProvider', publishedDate: DateTime(2020, 2, 2)),
+  BlogPost(
+    title: 'Blog App',
+    publishedDate: DateTime(2020, 1, 2),
+    body:
+        "This app was created using Dart and Flutter. It includes Flutter elements such as Inkwells, Navigators and Providers.",
+  ),
+  BlogPost(
+    title: 'MultiProvider',
+    publishedDate: DateTime(2020, 2, 2),
+    body:
+        "Mergin multiple providers into a single linear widget tree, MultiProviders are used to improve readability. Additionally they also reduce boilerplate code by eliminating multiple layers of nested providers",
+  ),
 ];
