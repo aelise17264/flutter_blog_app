@@ -1,5 +1,6 @@
 import 'package:blog_app/blog_post.dart';
 import 'package:blog_app/user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'package:blog_app/home_page.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        // FutureProvider<List<BlogPost>>(create: (context) => blogPosts(),),
         Provider<List<BlogPost>>(create: (context) => _blogPosts),
         Provider<User>(
           create: (context) => User(
@@ -72,3 +74,9 @@ final _blogPosts = [
         "Mergin multiple providers into a single linear widget tree, MultiProviders are used to improve readability. Additionally they also reduce boilerplate code by eliminating multiple layers of nested providers",
   ),
 ];
+
+Future<List<BlogPost>> blogPosts() {
+  return FirebaseFirestore.instance.collection('blogs').get().then((query) {
+    return query.docs.map((doc) => BlogPost.fromDocument(doc)).toList();
+  });
+}
